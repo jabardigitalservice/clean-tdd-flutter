@@ -33,7 +33,7 @@ class CheckDistributionDataSourceImpl implements CheckDistributionDataSource {
     if (response.statusCode == 200) {
       return CheckDistributionModel.fromJson(json.decode(response.body));
     } else {
-      throw ServerException();
+      throw ServerExceptions();
     }
   }
 }
