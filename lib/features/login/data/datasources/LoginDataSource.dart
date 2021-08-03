@@ -11,7 +11,7 @@ import 'package:clean_tdd_flutter/core/error/exceptions.dart';
 abstract class LoginDataSource {
   /// Calls the http://numbersapi.com/{number} endpoint.
 
-  Future<LoginModel> getLogin();
+  Future<LoginModel> getLogin(String? email, password);
 }
 
 class LoginDataSourceImpl implements LoginDataSource {
@@ -20,17 +20,18 @@ class LoginDataSourceImpl implements LoginDataSource {
   LoginDataSourceImpl({@required this.client});
 
   @override
-  Future<LoginModel> getLogin() =>
-      _getTriviaFromUrl(Uri.parse('https://graphqljds.herokuapp.com/graphql'));
+  Future<LoginModel> getLogin(String? email, password) =>
+      _getTriviaFromUrl(email, password);
 
-  Future<LoginModel> _getTriviaFromUrl(Uri url) async {
+  Future<LoginModel> _getTriviaFromUrl(String? email, password) async {
     try {
       final result = await client!.query(QueryOptions(
-        document: gql(GqlQuery.charactersQuery),
-      ));
-
+          document: gql(GqlQuery.loginQuery),
+          variables: {"email": email, "password": password}));
+      print(result.data);
       return LoginModel.fromJson(result.data!);
     } on Exception catch (exception) {
+      print('masuk error');
       print(exception);
       throw ServerExceptions();
     }

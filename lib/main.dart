@@ -1,3 +1,4 @@
+import 'package:clean_tdd_flutter/features/login/presentation/pages/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_tdd_flutter/features/checkDistribution/presentation/pages/CheckDistributionScreen.dart';
 import 'injection_container.dart' as di;
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: CheckDistributionPage(),
+      home: LoginPage(),
     );
   }
 }

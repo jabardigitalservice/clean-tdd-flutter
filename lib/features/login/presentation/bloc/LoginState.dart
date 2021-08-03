@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:clean_tdd_flutter/features/Login/data/models/LoginModel.dart';
+import 'package:clean_tdd_flutter/features/login/data/models/LoginModel.dart';
 
 abstract class LoginState extends Equatable {
   const LoginState();

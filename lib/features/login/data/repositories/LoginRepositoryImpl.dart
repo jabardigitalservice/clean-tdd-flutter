@@ -15,9 +15,10 @@ class LoginRepositoryImpl implements LoginRepository {
   });
 
   @override
-  Future<Either<Failure, LoginModel>> getLoginParam() async {
+  Future<Either<Failure, LoginModel>> getLoginParam(
+      String? email, password) async {
     return await _getLogin(() {
-      return loginDataSource!.getLogin();
+      return loginDataSource!.getLogin(email, password);
     });
   }
 

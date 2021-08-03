@@ -6,7 +6,7 @@ import 'package:clean_tdd_flutter/features/login/domain/usecases/GetLogin.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:clean_tdd_flutter/core/error/failures.dart';
-import 'package:clean_tdd_flutter/features/Login/data/models/LoginModel.dart';
+import 'package:clean_tdd_flutter/features/login/data/models/LoginModel.dart';
 import 'Bloc.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
@@ -31,7 +31,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoadLogin) {
       yield LoginLoading();
 
-      final failureOrSuccess = await getLogin!(NoParams());
+      final failureOrSuccess =
+          await getLogin!(Params(email: event.email, password: event.password));
       yield* _eitherLoadedOrErrorState(failureOrSuccess);
     }
   }
