@@ -15,22 +15,25 @@ class LoginRepositoryImpl implements LoginRepository {
   });
 
   @override
-  Future<Either<Failure, LoginModel>> getLoginParam(
+  Future<Either<Exception, LoginModel>> getLoginParam(
       String? email, password) async {
     return await _getLogin(() {
       return loginDataSource!.getLogin(email, password);
     });
   }
 
-  Future<Either<Failure, LoginModel>> _getLogin(
+  Future<Either<Exception, LoginModel>> _getLogin(
     _LoginData getLoginData,
   ) async {
     try {
       final loginModel = await getLoginData();
 
       return Right(loginModel);
-    } catch (e) {
-      return Left(ServerFailure());
+    } on Exception catch (e) {
+      print('masuk error left');
+
+      print(e);
+      return Left(e);
     }
   }
 }

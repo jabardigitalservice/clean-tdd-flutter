@@ -17,22 +17,22 @@ class CheckDistributionRepositoryImpl implements CheckDistributionRepository {
   });
 
   @override
-  Future<Either<Failure, CheckDistributionModel>> getCheckDistributionParam(
+  Future<Either<Exception, CheckDistributionModel>> getCheckDistributionParam(
       String? lat, long) async {
     return await _getCheckDistribution(() {
       return checkDistributionDataSource!.getCheckDistribution(lat, long);
     });
   }
 
-  Future<Either<Failure, CheckDistributionModel>> _getCheckDistribution(
+  Future<Either<Exception, CheckDistributionModel>> _getCheckDistribution(
     _CheckDistributionData getCheckDistributionData,
   ) async {
     try {
       final checkDistributionModel = await getCheckDistributionData();
 
       return Right(checkDistributionModel);
-    } catch (e) {
-      return Left(ServerFailure());
+    } on Exception catch (e) {
+      return Left(e);
     }
   }
 }

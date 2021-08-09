@@ -13,7 +13,7 @@ class GetLogin implements UseCase<LoginModel, Params> {
   GetLogin(this.repository);
 
   @override
-  Future<Either<Failure, LoginModel>> call(Params params) async {
+  Future<Either<Exception, LoginModel>> call(Params params) async {
     return await repository.getLoginParam(params.email, params.password);
   }
 }

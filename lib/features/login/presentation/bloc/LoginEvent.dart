@@ -11,3 +11,8 @@ class LoadLogin extends LoginEvent {
   @override
   List<Object> get props => <Object>[];
 }
+
+class InitLogin extends LoginEvent {
+  @override
+  List<Object> get props => <Object>[];
+}

@@ -4,6 +4,6 @@ import 'package:clean_tdd_flutter/features/checkDistribution/data/models/CheckDi
 import '../../../../core/error/failures.dart';
 
 abstract class CheckDistributionRepository {
-  Future<Either<Failure, CheckDistributionModel>> getCheckDistributionParam(
+  Future<Either<Exception, CheckDistributionModel>> getCheckDistributionParam(
       String? lat, long);
 }

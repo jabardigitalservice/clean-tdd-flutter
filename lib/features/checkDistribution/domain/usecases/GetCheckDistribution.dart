@@ -13,7 +13,7 @@ class GetCheckDistribution implements UseCase<CheckDistributionModel, Params> {
   GetCheckDistribution(this.repository);
 
   @override
-  Future<Either<Failure, CheckDistributionModel>> call(Params params) async {
+  Future<Either<Exception, CheckDistributionModel>> call(Params params) async {
     return await repository.getCheckDistributionParam(params.lat, params.long);
   }
 }

@@ -24,16 +24,15 @@ class LoginDataSourceImpl implements LoginDataSource {
       _getTriviaFromUrl(email, password);
 
   Future<LoginModel> _getTriviaFromUrl(String? email, password) async {
-    try {
-      final result = await client!.query(QueryOptions(
-          document: gql(GqlQuery.loginQuery),
-          variables: {"email": email, "password": password}));
-      print(result.data);
+    final result = await client!.query(QueryOptions(
+        document: gql(GqlQuery.loginQuery),
+        variables: {"email": email, "password": password}));
+    print(result.data);
+    if (result.exception != null) {
+      print('masuk exeption');
+      throw Exception(result.exception.toString());
+    } else {
       return LoginModel.fromJson(result.data!);
-    } on Exception catch (exception) {
-      print('masuk error');
-      print(exception);
-      throw ServerExceptions();
     }
   }
 }

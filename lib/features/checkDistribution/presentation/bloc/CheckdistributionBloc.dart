@@ -40,11 +40,10 @@ class CheckDistributionBloc
   }
 
   Stream<CheckdistributionState> _eitherLoadedOrErrorState(
-    Either<Failure, CheckDistributionModel> failureOrTrivia,
+    Either<Exception, CheckDistributionModel> failureOrTrivia,
   ) async* {
     yield failureOrTrivia.fold(
-      (failure) =>
-          CheckDistributionFailure(error: _mapFailureToMessage(failure)),
+      (failure) => CheckDistributionFailure(error: failure.toString()),
       (record) => CheckDistributionLoaded(record: record),
     );
   }

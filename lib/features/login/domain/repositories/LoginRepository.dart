@@ -4,5 +4,5 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 
 abstract class LoginRepository {
-  Future<Either<Failure, LoginModel>> getLoginParam(String? email, password);
+  Future<Either<Exception, LoginModel>> getLoginParam(String? email, password);
 }

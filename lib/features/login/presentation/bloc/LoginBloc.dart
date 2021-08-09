@@ -35,13 +35,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           await getLogin!(Params(email: event.email, password: event.password));
       yield* _eitherLoadedOrErrorState(failureOrSuccess);
     }
+
+    if (event is InitLogin) {
+      yield LoginInitial();
+    }
   }
 
   Stream<LoginState> _eitherLoadedOrErrorState(
-    Either<Failure, LoginModel> failureOrTrivia,
+    Either<Exception, LoginModel> failureOrTrivia,
   ) async* {
     yield failureOrTrivia.fold(
-      (failure) => LoginFailure(error: _mapFailureToMessage(failure)),
+      (failure) => LoginFailure(error: failure.toString()),
       (record) => LoginLoaded(record: record),
     );
   }
