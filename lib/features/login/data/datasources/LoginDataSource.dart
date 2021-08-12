@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:clean_tdd_flutter/core/util/SharedPreferences.dart';
 import 'package:clean_tdd_flutter/core/util/gpl_query.dart';
 import 'package:clean_tdd_flutter/features/login/data/models/LoginModel.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -32,6 +33,7 @@ class LoginDataSourceImpl implements LoginDataSource {
       print('masuk exeption');
       throw Exception(result.exception.toString());
     } else {
+      await Preferences.setDataString('token', result.data!['login']['token']);
       return LoginModel.fromJson(result.data!);
     }
   }

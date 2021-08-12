@@ -7,4 +7,16 @@ mixin GqlQuery {
   }
   }
   ''';
+
+  static String postQuery = '''
+  query{
+  posts(page: 1){
+    posts{
+      content
+      title
+    }
+    totalPosts
+  }
+}
+  ''';
 }

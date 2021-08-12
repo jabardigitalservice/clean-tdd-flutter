@@ -1,4 +1,8 @@
 import 'package:clean_tdd_flutter/core/injection/register_module.dart';
+import 'package:clean_tdd_flutter/features/content/data/datasources/ContentDataSource.dart';
+import 'package:clean_tdd_flutter/features/content/data/repositories/ContentRepositoryImpl.dart';
+import 'package:clean_tdd_flutter/features/content/domain/repositories/ContentRepository.dart';
+import 'package:clean_tdd_flutter/features/content/domain/usecases/GetContent.dart';
 import 'package:clean_tdd_flutter/features/login/data/datasources/LoginDataSource.dart';
 import 'package:clean_tdd_flutter/features/login/data/repositories/LoginRepositoryImpl.dart';
 import 'package:clean_tdd_flutter/features/login/domain/repositories/LoginRepository.dart';
@@ -15,6 +19,7 @@ import 'package:clean_tdd_flutter/features/checkDistribution/presentation/bloc/B
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/network/network_info.dart';
+import 'features/content/presentation/bloc/Bloc.dart';
 import 'features/login/presentation/bloc/Bloc.dart';
 
 final sl = GetIt.instance;
@@ -32,10 +37,16 @@ Future<void> init() async {
       login: sl(),
     ),
   );
+  sl.registerFactory(
+    () => ContentBloc(
+      content: sl(),
+    ),
+  );
 
   // Use cases
   sl.registerLazySingleton(() => GetCheckDistribution(sl()));
   sl.registerLazySingleton(() => GetLogin(sl()));
+  sl.registerLazySingleton(() => GetContent(sl()));
 
   // Repository
   sl.registerLazySingleton<CheckDistributionRepository>(
@@ -48,6 +59,11 @@ Future<void> init() async {
       loginDataSource: sl(),
     ),
   );
+  sl.registerLazySingleton<ContentRepository>(
+    () => ContentRepositoryImpl(
+      contentDataSource: sl(),
+    ),
+  );
 
   // Data sources
   sl.registerLazySingleton<CheckDistributionDataSource>(
@@ -55,6 +71,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<LoginDataSource>(
     () => LoginDataSourceImpl(client: sl()),
+  );
+  sl.registerLazySingleton<ContentDataSource>(
+    () => ContentDataSourceImpl(client: sl()),
   );
 
   //! Core
