@@ -61,7 +61,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
                   : Text(
                       widget.title,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 12,
                         color: Colors.grey[800],
                         fontWeight: FontWeight.w700,
                       ),
@@ -85,6 +85,8 @@ class _BuildTextFieldState extends State<BuildTextField> {
                   obscureText: widget.obsecureText!,
                   controller: widget.controller,
                   decoration: InputDecoration(
+                      fillColor: Colors.grey[50],
+                      filled: true,
                       suffixIcon: widget.title == 'Password'
                           ? IconButton(
                               icon: (Icon(
@@ -102,7 +104,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
                           : null,
                       hintText: widget.hintText,
                       hintStyle:
-                          TextStyle(color: Colors.grey[400], fontSize: 13),
+                          TextStyle(color: Colors.grey[600], fontSize: 14),
                       enabledBorder: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(widget.roundedBorder!),

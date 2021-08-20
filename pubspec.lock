@@ -282,6 +282,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  jds_design:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: develop
+      resolved-ref: "1e89cc17bb9d3475b719f59ad4bcad75d8237241"
+      url: "https://github.com/jabardigitalservice/jds-flutter-package.git"
+    source: git
+    version: "0.0.1"
   js:
     dependency: transitive
     description:
